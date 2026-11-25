@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elkode | Web and software development by Elkanah</title>
+<meta name="description" content="Elkode is the studio of Elkanah, a web and software developer. Clean code, built to last.">
+<meta property="og:title" content="Elkode"><meta property="og:description" content="Clean code. Built to last.">
+<meta property="og:image" content="https://elkode.tech/images/og-image.png">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<script>document.documentElement.classList.add("js")</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0e16;--panel:#121927;--line:#2b3750;--text:#fff;--muted:#b9c4d8;--accent:#8fd0ff;--ink:#0a0e16;--sc:143,208,255;--head:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;--body:"DM Sans",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{background:var(--bg);color:var(--text);font:400 1.06rem/1.65 var(--body);overflow-x:hidden}
+a{color:inherit}:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+@media(min-width:900px){.wrap{padding-left:90px}}
+section{padding:96px 0}
+h1,h2,h3{font-family:var(--head);line-height:1.05;letter-spacing:-.02em}
+h2{font-size:clamp(2rem,5vw,3.2rem);margin-bottom:14px}
+.lead{color:var(--muted);max-width:52ch}
+.btn{display:inline-block;padding:12px 24px;border-radius:999px;border:1px solid var(--line);color:var(--text);background:transparent;cursor:pointer;font:500 1rem var(--body);text-decoration:none;transition:transform .2s,border-color .2s}
+.btn.primary{background:#fff;color:var(--ink);border-color:#fff}
+.btn:hover{transform:translateY(-2px);border-color:var(--accent)}.btn:disabled{opacity:.6;cursor:wait}
+/* header */
+header{position:sticky;top:0;z-index:20;background:rgba(10,14,22,.95);border-bottom:1px solid var(--line);overflow:hidden;transition:box-shadow .3s}
+header.scrolled{box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.bar{position:relative;z-index:1;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:64px;max-width:1120px;margin:0 auto;padding:0 24px}
+.logo{font:800 1.4rem var(--head);text-decoration:none}.logo i{font-style:normal;color:var(--accent)}
+nav ul{display:flex;gap:26px;list-style:none;padding:0}
+nav a{text-decoration:none;color:var(--muted);font-weight:500;position:relative}
+nav a:hover,nav a.active{color:#fff}
+nav a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--accent);transform:scaleX(0);transition:transform .3s}
+nav a.active::after{transform:scaleX(1)}
+.hire{justify-self:end;padding:8px 18px;font-size:.95rem}
+header::after{content:"";position:absolute;top:0;bottom:0;left:0;width:60%;background:linear-gradient(100deg,transparent,rgba(var(--sc),.13),transparent);transform:translateX(-120%);opacity:0;animation:sweep 10s ease-in-out infinite;pointer-events:none}
+header::before{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,transparent,rgba(var(--sc),.5),transparent);animation:pulse 5s ease-in-out infinite alternate;pointer-events:none}
+@keyframes sweep{0%{transform:translateX(-120%);opacity:0}10%,50%{opacity:1}62%,100%{transform:translateX(260%);opacity:0}}
+@keyframes pulse{from{opacity:.15}to{opacity:.55}}
+/* hero */
+.hero{padding:84px 0 0}
+.hero h1{font-size:clamp(3rem,10.5vw,7.6rem);font-weight:800;line-height:.95}
+.hero h1 span{display:block}.hero h1 .b{color:var(--accent);padding-left:clamp(0px,9vw,130px)}
+.hero .row{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-top:36px}
+.hero p{color:var(--muted);max-width:42ch}.cta{display:flex;gap:12px;flex-wrap:wrap}
+.marquee{overflow:hidden;border-block:1px solid var(--line);padding:16px 0;margin-top:64px;background:rgba(255,255,255,.04)}
+.marquee div{display:flex;gap:48px;width:max-content;animation:mq 24s linear infinite;font:800 1.6rem var(--head);color:var(--muted)}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* work (pinned, toy drags the cards) */
+.work{height:calc(100vh - 64px + (var(--n,3) - 1) * 90vh);height:calc(100svh - 64px + (var(--n,3) - 1) * 90svh);padding:0}
+.stage{position:sticky;top:64px;height:calc(100vh - 64px);height:calc(100svh - 64px);overflow:hidden}
+.stage .head{position:absolute;top:28px;left:0;right:0;z-index:2}
+#count{position:absolute;right:24px;top:36px;font:800 1.2rem var(--head);color:var(--muted);z-index:2}
+#belt{position:absolute;inset:0}
+.card{position:absolute;left:50%;top:50%;width:min(520px,84vw);background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;will-change:transform}
+.thumb{aspect-ratio:16/9;position:relative;display:grid;place-items:center;font:800 3rem var(--head);color:var(--ink);overflow:hidden}
+.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cbody{padding:20px;display:grid;gap:10px}.cbody p{color:var(--muted);font-size:.98rem}
+.tags{display:flex;flex-wrap:wrap;gap:6px}.tags span{font-size:.82rem;background:rgba(255,255,255,.12);padding:2px 12px;border-radius:99px}
+.links{display:flex;gap:16px}.links a{color:var(--accent);font-weight:500;text-decoration:none}
+.js .card .thumb{clip-path:inset(0 100% 0 0);transition:clip-path .8s cubic-bezier(.2,.8,.2,1)}
+.js .card .cbody>*{transform:translateX(-36px);opacity:0;transition:transform .6s cubic-bezier(.2,.8,.2,1),opacity .4s}
+.js .card.active .thumb{clip-path:inset(0)}
+.js .card.active .cbody>*{transform:none;opacity:1}
+.card.active .cbody>:nth-child(2){transition-delay:.15s}.card.active .cbody>:nth-child(3){transition-delay:.3s}.card.active .cbody>:nth-child(4){transition-delay:.45s}.card.active .cbody>:nth-child(1){transition-delay:.05s}
+.work.flat{height:auto;padding:96px 0}.flat .stage{position:static;height:auto;overflow:visible}.flat .stage .head{position:static}
+.flat #count{display:none}.flat #belt{position:static;display:grid;gap:20px;margin-top:24px}
+.flat .card{position:static;width:auto;transform:none!important;opacity:1!important}
+.flat .card .thumb,.flat .card .cbody>*{clip-path:none!important;transform:none!important;opacity:1!important}
+/* reveal animations: wipe, slide, zoom, flip */
+.js [data-a]{transition:transform .9s cubic-bezier(.2,.8,.2,1),clip-path .9s cubic-bezier(.2,.8,.2,1),opacity .5s}
+.js [data-a].in{transition-delay:calc(var(--i,0)*110ms)}
+.js [data-a=wipe]{clip-path:inset(-20% 100% -20% -5%)}
+.js [data-a=left]{transform:translateX(-90px) rotate(-3deg);opacity:0}
+.js [data-a=right]{transform:translateX(90px) rotate(3deg);opacity:0}
+.js [data-a=zoom]{transform:scale(.7) rotate(-5deg);opacity:0}
+.js [data-a=flip]{transform:perspective(700px) rotateY(-70deg);transform-origin:left;opacity:0}
+.js [data-a].in{transform:none;opacity:1;clip-path:inset(-20% -5% -20% -5%)}
+/* about bento */
+.bento{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:32px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px}
+.t-photo{grid-row:1/3;padding:0;border-radius:220px 220px 18px 18px;overflow:hidden;min-height:360px;display:grid;place-items:center;color:var(--muted);text-align:center}
+.t-photo img{width:100%;height:100%;object-fit:cover}.t-bio{grid-column:2/4}
+.tile h3{font-size:1.25rem;margin-bottom:10px}.tile ul{padding-left:18px;color:var(--muted)}
+pre.code{font:400 .9rem/1.8 ui-monospace,Menlo,Consolas,monospace;color:var(--muted);overflow-x:auto}.k{color:var(--accent)}.s{color:#fff}
+/* reviews */
+.rev{overflow:hidden;margin-top:28px}.track{display:flex;transition:transform .8s cubic-bezier(.7,0,.2,1)}
+.slide{flex:0 0 100%;padding:8px 4px}
+.slide blockquote{font:700 clamp(1.4rem,3.2vw,2.4rem)/1.25 var(--head);max-width:28ch}
+.slide cite{display:block;margin-top:18px;color:var(--muted);font-style:normal}.stars{color:#ffe9a8;letter-spacing:3px}
+.rctl{display:flex;gap:10px;align-items:center;margin-top:22px}
+.rctl button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:#fff;cursor:pointer;font-size:1.1rem}
+.dots{display:flex;gap:8px;margin-left:12px}.dots i{width:10px;height:10px;border-radius:6px;background:var(--line);cursor:pointer;transition:.3s}.dots i.on{background:#fff;width:26px}
+.note{color:var(--muted);font-size:.85rem;margin-top:10px}
+/* contact */
+.cgrid{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:start}
+.methods{list-style:none;padding:0;display:grid;gap:12px;margin-top:24px}
+.methods a{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--panel);border:1px solid var(--line);border-radius:14px;text-decoration:none;transition:transform .25s,border-color .25s}
+.methods a:hover{border-color:var(--accent);transform:translateX(6px)}
+.ic{flex:none;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.methods a:hover .ic{transform:scale(1.12) rotate(-6deg)}.ic svg{width:24px;height:24px}
+.wa{background:rgba(37,211,102,.16);color:#25d366}.ml{background:rgba(143,208,255,.16);color:var(--accent)}.ph{background:rgba(255,233,168,.16);color:#ffe9a8}
+.methods b{display:block;font-weight:500}.methods small{display:block;color:var(--muted);font-size:.88rem;word-break:break-all}
+.fcard{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:28px}
+form{display:grid;gap:14px}label{display:grid;gap:6px;font-weight:500;font-size:.95rem}
+input,textarea{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:#fff;font:inherit}
+textarea{min-height:120px;resize:vertical}.fstat{min-height:1.6em;color:var(--accent)}
+footer{border-top:1px solid var(--line);padding:40px 0 28px;color:var(--muted);overflow:hidden}
+.big{font:800 clamp(4rem,19vw,15rem);line-height:.8;color:rgba(255,255,255,.07);letter-spacing:-.04em}
+footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:24px}footer a{margin-left:16px;text-decoration:none}footer a:hover{color:#fff}
+/* background */
+#bg{position:fixed;inset:0;z-index:-2;overflow:hidden;background:var(--bg)}
+#bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,14,22,.72),rgba(10,14,22,.88))}
+.bg-layer{position:absolute;inset:-6%;opacity:0;visibility:hidden;transition:opacity 1.4s,visibility 0s 1.4s;background-position:center;background-repeat:no-repeat;background-size:cover,100% 100%,100% 100%}
+.bg-layer.active{opacity:1;visibility:visible;transition-delay:0s}.lite .bg-layer{animation:none}
+.l1{background-image:url("images/bg.jpg"),radial-gradient(60% 50% at 25% 30%,#1c3d6b,transparent 70%),radial-gradient(50% 50% at 80% 70%,#16335d,transparent 70%);animation:dA 26s ease-in-out infinite alternate}
+.l2{background-image:url("images/bg-2.jpg"),radial-gradient(55% 50% at 75% 30%,#34445f,transparent 70%),radial-gradient(50% 50% at 20% 75%,#25344f,transparent 70%);animation:dB 30s ease-in-out infinite alternate}
+.l3{background-image:url("images/bg-3.jpg"),radial-gradient(55% 50% at 30% 70%,#22465e,transparent 70%),radial-gradient(50% 50% at 75% 25%,#2a3f66,transparent 70%);animation:dA 34s ease-in-out infinite alternate-reverse}
+@keyframes dA{from{transform:scale(1.02) translate(-2%,-1.5%)}to{transform:scale(1.13) translate(2%,1.5%)}}
+@keyframes dB{from{transform:scale(1.13) translate(2%,-1.5%)}to{transform:scale(1.02) translate(-2%,1.5%)}}
+#cv{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+#progress{position:fixed;top:0;left:0;right:0;height:3px;background:#fff;transform:scaleX(0);transform-origin:left;z-index:30}
+/* toy */
+#toy{position:fixed;left:0;top:0;z-index:45;width:84px;height:140px;transform-origin:50% 100%;pointer-events:none}
+#toy-btn{pointer-events:auto;position:absolute;inset:0;background:none;border:0;cursor:pointer;padding:0}
+#toy .head{position:absolute;left:19px;top:0;width:46px;height:46px;border-radius:50%;border:3px solid var(--accent);background:#fff;color:var(--ink);display:grid;place-items:center;font:800 2.1rem/1 var(--head);padding-bottom:5px}
+#toy svg{position:absolute;left:0;top:40px;width:84px;height:100px;overflow:visible}
+.arm-l{transform-origin:28px 22px;transform:rotate(var(--al,8deg));transition:transform .3s}
+.arm-r{transform-origin:56px 22px;transform:rotate(var(--ar,-8deg));transition:transform .3s}
+.leg-l{transform-origin:36px 56px}.leg-r{transform-origin:48px 56px}
+#toy.run .leg-l{animation:step .35s ease-in-out infinite alternate}#toy.run .leg-r{animation:step .35s ease-in-out infinite alternate-reverse}
+@keyframes step{from{transform:rotate(-28deg)}to{transform:rotate(28deg)}}
+#toy.drag{--al:-78deg;--ar:-102deg}#toy.lean{--al:12deg;--ar:-62deg}
+.say{position:absolute;bottom:100%;left:50%;margin-bottom:6px;transform:translateX(-50%) scale(.8);background:#fff;color:var(--ink);padding:7px 12px;border-radius:12px;font-size:.88rem;font-weight:500;width:max-content;max-width:180px;opacity:0;transition:.3s;pointer-events:none}
+.say.on{opacity:1;transform:translateX(-50%)}
+#tmenu{position:absolute;left:90px;top:20px;list-style:none;padding:8px;background:var(--panel);border:1px solid var(--line);border-radius:12px;display:none;pointer-events:auto}
+#tmenu.open{display:block}#tmenu a{display:block;padding:6px 14px;text-decoration:none;border-radius:8px;white-space:nowrap}#tmenu a:hover{background:rgba(255,255,255,.1)}
+/* help bot */
+#bot-btn{position:fixed;right:20px;bottom:20px;z-index:50;width:58px;height:58px;border-radius:50%;border:0;background:#fff;color:var(--ink);font-size:1.6rem;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,.5)}
+#bot-btn.pulse{animation:bp 1.6s ease 3}@keyframes bp{0%{box-shadow:0 0 0 0 rgba(143,208,255,.7)}100%{box-shadow:0 0 0 22px rgba(143,208,255,0)}}
+#bot-tip{position:fixed;right:20px;bottom:90px;z-index:50;background:#fff;color:var(--ink);padding:10px 16px;border-radius:12px 12px 4px 12px;font-size:.95rem;font-weight:500;max-width:220px;opacity:0;transform:translateY(8px);pointer-events:none;transition:.3s}
+#bot-tip.show{opacity:1;transform:none}
+#bot-panel{position:fixed;right:20px;bottom:90px;z-index:51;width:340px;max-width:calc(100vw - 40px);height:460px;max-height:calc(100vh - 120px);background:var(--panel);border:1px solid var(--line);border-radius:14px;display:none;flex-direction:column;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.55)}
+#bot-panel.open{display:flex;animation:pin .25s ease;transform-origin:bottom right}@keyframes pin{from{opacity:0;transform:translateY(14px) scale(.92)}to{opacity:1;transform:none}}
+.bh{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line);font:700 1rem var(--head)}.bh button{background:none;border:0;color:var(--muted);font-size:1.3rem;cursor:pointer}
+#bot-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:85%;padding:9px 13px;border-radius:12px;font-size:.95rem;line-height:1.5;animation:mi .25s ease}@keyframes mi{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:none}}
+.msg.bot{background:var(--bg);align-self:flex-start}.msg.me{background:#fff;color:var(--ink);align-self:flex-end}.msg a{color:var(--accent)}.msg.me a{color:inherit}
+.msg.typing{display:flex;gap:4px;padding:12px 14px}.msg.typing span{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:dot 1s infinite}.msg.typing span:nth-child(2){animation-delay:.15s}.msg.typing span:nth-child(3){animation-delay:.3s}
+@keyframes dot{0%,60%,100%{transform:none;opacity:.5}30%{transform:translateY(-4px);opacity:1}}
+.quick{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 10px}.quick button{background:none;border:1px solid var(--line);color:#fff;border-radius:999px;padding:5px 12px;font:inherit;font-size:.88rem;cursor:pointer}.quick button:hover{border-color:var(--accent)}
+#bot-form{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line)}#bot-form input{flex:1;min-width:0;padding:9px 12px}#bot-form .btn{padding:9px 16px}
+@media(max-width:900px){.bento,.cgrid{grid-template-columns:1fr}.t-photo{grid-row:auto;min-height:300px}.t-bio{grid-column:auto}.cgrid{gap:32px}}
+@media(max-width:760px){section{padding:64px 0}.hire{display:none}.bar{grid-template-columns:auto 1fr}nav ul{gap:12px;font-size:.85rem;justify-content:flex-end}#bot-btn{width:52px;height:52px;right:14px;bottom:14px}#bot-tip,#bot-panel{right:14px;bottom:76px}}
+html{-webkit-text-size-adjust:100%}
+@media(min-width:1500px){.wrap,.bar{max-width:1280px}html{font-size:17px}}
+@media(max-width:380px){.wrap,.bar{padding:0 16px}nav ul{gap:9px;font-size:.8rem}.btn{padding:11px 18px}}
+@media(hover:none){nav a{padding:8px 0}}
+#bot-btn{bottom:calc(14px + env(safe-area-inset-bottom,0px))}
+@media(prefers-reduced-motion:reduce){.js [data-a]{opacity:1!important;transform:none!important;clip-path:none!important}header::before,header::after{animation:none!important}header::after{display:none}*{animation:none!important;transition:none!important;scroll-behavior:auto!important}#progress{display:none}}
+</style>
+</head>
+<body>
+<div id="bg" aria-hidden="true"><div class="bg-layer l1 active"></div><div class="bg-layer l2"></div><div class="bg-layer l3"></div></div>
+<canvas id="cv" aria-hidden="true"></canvas><div id="progress"></div>
+<header><div class="bar">
+  <a class="logo" href="#home">El<i>code</i></a>
+  <nav aria-label="Main"><ul>
+    <li><a href="#home">Home</a></li><li><a href="#work">Work</a></li><li><a href="#about">About</a></li><li><a href="#reviews">Reviews</a></li><li><a href="#contact">Contact</a></li>
+  </ul></nav>
+  <a class="btn primary hire" href="#contact">Hire me</a>
+</div></header>
+
+<main>
+<section class="hero" id="home"><div class="wrap">
+  <h1><span data-a="left">Clean code.</span><span class="b" data-a="right">Built to last.</span></h1>
+  <div class="row">
+    <p data-a="wipe">I’m Elkanah, a web and software developer in Accra. I build fast, reliable websites and apps for people who want things that work.</p>
+    <div class="cta" data-a="zoom"><a class="btn primary" href="#work">See my work</a><a class="btn" href="#contact">Contact me</a></div>
+  </div>
+</div>
+<div class="marquee" aria-hidden="true"><div id="mq"></div></div></section>
+
+<section class="work" id="work"><div class="stage">
+  <div class="wrap head"><h2 data-a="wipe">Selected work</h2></div><div id="count"></div>
+  <div id="belt"></div>
+</div></section>
+
+<section id="about"><div class="wrap">
+  <h2 data-a="wipe">About Elkanah</h2>
+  <div class="bento">
+    <div class="tile t-photo" data-a="zoom"><img src="images/elkanah 2.jpg" alt="Portrait of Elkanah" onerror="this.replaceWith('Add your photo as images/elkanah.jpg')"></div>
+    <div class="tile t-bio" data-a="left"><h3>Hello, I’m Elkanah</h3><p class="lead">I’m a web and software developer based in Accra. I care about code that is readable, fast and easy to change later. Replace this text with your own story: what you build, what you enjoy and what you want to work on next.</p></div>
+    <div class="tile" data-a="flip"><h3>What I build</h3><ul><li>Websites and landing pages</li><li>Web apps and tools</li><li>Speed and SEO</li><li>Hosting and launch</li></ul></div>
+    <div class="tile" data-a="right"><pre class="code"><span class="k">const</span> elkode = {
+  owner: <span class="s">"Elkanah"</span>,
+  focus: [<span class="s">"web"</span>, <span class="s">"software"</span>],
+  available: <span class="k">true</span>
+};</pre><p style="margin-top:14px"><a class="btn" href="files/Elkanah-CV.pdf" download>Download CV</a></p></div>
+  </div>
+</div></section>
+
+<section id="reviews"><div class="wrap">
+  <h2 data-a="wipe">Client reviews</h2>
+  <div class="rev" data-a="right"><div class="track" id="track"></div>
+    <div class="rctl"><button id="rp" aria-label="Previous review">←</button><button id="rn" aria-label="Next review">→</button><div class="dots" id="dots"></div></div>
+    <p class="note" id="sample"></p></div>
+</div></section>
+
+<section id="contact"><div class="wrap cgrid">
+  <div>
+    <h2 data-a="wipe">Let’s build something</h2>
+    <p class="lead" data-a="left">Tell me what you need. I reply within a day or two.</p>
+    <ul class="methods">
+      <li data-a="left"><a href="https://wa.me/233551980683" target="_blank" rel="noopener"><span class="ic wa"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></span><span><b>WhatsApp me</b><small>+233 55 198 0683</small></span></a></li>
+      <li data-a="left"><a href="mailto:elkanahaidoo2009@gmail.com"><span class="ic ml"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><span><b>Email me</b><small>elkanahaidoo2009@gmail.com</small></span></a></li>
+      <li data-a="left"><a href="tel:+233551980683"><span class="ic ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><span><b>Call me</b><small>+233 55 198 0683</small></span></a></li>
+    </ul>
+  </div>
+  <div class="fcard" id="fcard" data-a="right">
+    <!-- Replace YOUR_FORM_ID with your Formspree form ID (formspree.io) -->
+    <form id="cform" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <input type="hidden" name="_subject" value="New message from elkode.tech"><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none">
+      <label>Name <input name="name" required autocomplete="name"></label>
+      <label>Email <input type="email" name="email" required autocomplete="email"></label>
+      <label>Phone number <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="eg: +233 241 234 567"></label>
+      <label>Message <textarea name="message" required></textarea></label>
+      <button class="btn primary" type="submit">Send message</button><p class="fstat" id="fstat" role="status"></p>
+    </form>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap"><div class="big" aria-hidden="true">Elkode</div>
+  <div class="row"><span>© <span id="yr"></span> Elkode</span><span><a href="https://github.com/elkode">GitHub</a><a href="https://x.com/elkode">X</a><a href="https://linkedin.com/in/elkode">LinkedIn</a><a href="#home">Back to top</a></span></div>
+</div></footer>
+
+<!-- toy guide: part of the navigation -->
+<div id="toy"><button id="toy-btn" aria-label="Site guide: open the menu"></button>
+  <div class="head" aria-hidden="true">e</div>
+  <svg viewBox="0 0 84 100" aria-hidden="true"><line class="leg-l" x1="36" y1="56" x2="36" y2="92" stroke="#8fd0ff" stroke-width="10" stroke-linecap="round"/><line class="leg-r" x1="48" y1="56" x2="48" y2="92" stroke="#8fd0ff" stroke-width="10" stroke-linecap="round"/><rect x="26" y="6" width="32" height="54" rx="14" fill="#fff"/><line class="arm-l" x1="28" y1="22" x2="28" y2="52" stroke="#dfe8f7" stroke-width="9" stroke-linecap="round"/><line class="arm-r" x1="56" y1="22" x2="56" y2="52" stroke="#dfe8f7" stroke-width="9" stroke-linecap="round"/></svg>
+  <div class="say" id="say"></div>
+  <ul id="tmenu"><li><a href="#home">Home</a></li><li><a href="#work">Work</a></li><li><a href="#about">About</a></li><li><a href="#reviews">Reviews</a></li><li><a href="#contact">Contact</a></li></ul>
+</div>
+
+<!-- help bot -->
+<div id="bot-tip" role="status"></div>
+<section id="bot-panel" aria-label="Elkode Assistant" style="padding:0">
+  <div class="bh"><span>Elkode Assistant</span><button id="bot-close" aria-label="Close help chat">×</button></div>
+  <div id="bot-msgs" aria-live="polite"></div><div class="quick" id="bot-quick"></div>
+  <form id="bot-form" autocomplete="off"><input id="bot-input" placeholder="Type your question" aria-label="Your question"><button class="btn primary" type="submit">Send</button></form>
+</section>
+<button id="bot-btn" aria-label="Open help chat" aria-expanded="false">💬</button>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches,clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),lerp=(a,b,t)=>a+(b-a)*t;
+const lite=reduce||matchMedia("(max-width:760px)").matches||(navigator.deviceMemory&&navigator.deviceMemory<=4)||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=4);
+if(lite)document.documentElement.classList.add("lite");
+/* ---------- EDIT THESE ---------- */
+const EMAIL="elkanahaidoo2009@gmail.com",WHATSAPP="233551980683",AI_ENDPOINT="";
+const SAMPLE_REVIEWS=true; // set to false once these are real reviews
+const projects=[
+ {title:"Project One",description:"Coming soon.",stack:["HTML","CSS","JS"],liveUrl:"#",repoUrl:"#",image:"images/project-1.jpg",color:"#8fd0ff"},
+ {title:"Project Two",description:"Yet to be uploaded. Description: faster, simpler, or something people now use.",stack:["React","Node.js"],liveUrl:"#",repoUrl:"#",image:"images/project-2.jpg",color:"#ffffff"},
+ {title:"Project Three",description:"Add the problem, your solution, and the outcome here.",stack:["JavaScript","API"],liveUrl:"#",repoUrl:"#",image:"images/project-3.jpg",color:"#ffe9a8"}];
+const reviews=[
+ {q:"Elkanah delivered a clean, fast site and kept me updated at every step.",n:"Client name",r:"Business owner"},
+ {q:"Great communication and the code was easy for my team to pick up.",n:"Client name",r:"Startup founder"},
+ {q:"Exactly what I asked for, finished ahead of time.",n:"Client name",r:"Freelance designer"}];
+/* -------------------------------- */
+$("#phone").addEventListener("input",e=>{const raw=e.target.value,plus=raw.trim().startsWith("+"),d=raw.replace(/\D/g,"").slice(0,15),o=(d.match(/.{1,3}/g)||[]).join(" "),f=plus?"+"+o:o;if(raw!==f)e.target.value=f});
+$("#yr").textContent=new Date().getFullYear();
+$("#mq").innerHTML=Array(2).fill(["HTML","CSS","JavaScript","React","Node.js","Git","APIs","SEO"].map(s=>`<span>${s}</span><span>✦</span>`).join("")).join("");
+
+/* projects */
+const belt=$("#belt");
+projects.forEach(p=>{const c=document.createElement("article");c.className="card";
+ c.innerHTML=`<div class="thumb" style="background:${p.color}">${p.title[0]}<img src="${p.image}" alt="${p.title} screenshot" loading="lazy" onerror="this.remove()"></div><div class="cbody"><h3>${p.title}</h3><p>${p.description}</p><div class="tags">${p.stack.map(s=>`<span>${s}</span>`).join("")}</div><div class="links"><a href="${p.liveUrl}">Live demo</a><a href="${p.repoUrl}">GitHub</a></div></div>`;belt.appendChild(c)});
+const cards=$$(".card"),work=$("#work");work.style.setProperty("--n",cards.length);function setFlat(){work.classList.toggle("flat",reduce||innerHeight<560)}setFlat();addEventListener("resize",setFlat);
+
+/* reviews carousel */
+const track=$("#track"),dots=$("#dots");let ri=0,rt;
+reviews.forEach((r,i)=>{track.insertAdjacentHTML("beforeend",`<div class="slide"><div class="stars" aria-label="5 stars">★★★★★</div><blockquote>“${r.q}”</blockquote><cite>${r.n}, ${r.r}</cite></div>`);const d=document.createElement("i");d.onclick=()=>show(i);dots.appendChild(d)});
+function show(i){ri=(i+reviews.length)%reviews.length;track.style.transform=`translateX(-${ri*100}%)`;[...dots.children].forEach((d,k)=>d.classList.toggle("on",k===ri));clearInterval(rt);if(!reduce)rt=setInterval(()=>show(ri+1),5500)}
+$("#rp").onclick=()=>show(ri-1);$("#rn").onclick=()=>show(ri+1);show(0);
+if(SAMPLE_REVIEWS)$("#sample").textContent="Sample reviews. Replace them with real client feedback.";
+
+/* reveal animations (play in on the way down, out on the way up) */
+$$("[data-a]").forEach(el=>el.style.setProperty("--i",Math.min([...el.parentNode.children].indexOf(el),5)));
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add("in");else if(e.boundingClientRect.top>0)e.target.classList.remove("in")}),{threshold:.15,rootMargin:"0px 0px -6% 0px"});
+$$("[data-a]").forEach(el=>io.observe(el));
+const links=$$("nav a"),spy=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle("active",a.getAttribute("href")==="#"+e.target.id))}),{rootMargin:"-45% 0px -50% 0px"});
+["home","work","about","reviews","contact"].forEach(id=>spy.observe($("#"+id)));
+
+/* background scenes + network */
+const SC=[[143,208,255],[255,255,255],[190,225,255]],SP=[1,1.5,.8];let scene=0;
+const layers=$$(".bg-layer");
+(function(){const cv=$("#cv"),cx=cv.getContext("2d"),root=document.documentElement;let W,H,lw=0,nodes=[],mouse={x:-999,y:-999},cur=SC[0].slice(),spd=1,col=cur.join(","),last="";
+ function size(){const d=lite?1:Math.min(devicePixelRatio||1,1.5);W=innerWidth;H=innerHeight;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0);
+  nodes=Array.from({length:lite?Math.min(28,Math.floor(W*H/30000)):Math.min(60,Math.floor(W*H/24000))},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.5+.8}))}
+ function ln(a,b,c,d,m,x){cx.strokeStyle=`rgba(${col},${.25*(1-m/x)})`;cx.beginPath();cx.moveTo(a,b);cx.lineTo(c,d);cx.stroke()}
+ let lt=0;function draw(t){if(!reduce&&t&&t-lt<(lite?50:33)){requestAnimationFrame(draw);return}lt=t;const T=SC[scene];for(let k=0;k<3;k++)cur[k]=reduce?T[k]:cur[k]+(T[k]-cur[k])*.04;spd=reduce?1:spd+(SP[scene]-spd)*.04;col=cur.map(Math.round).join(",");
+  if(col!==last){last=col;root.style.setProperty("--sc",col)}
+  cx.clearRect(0,0,W,H);
+  for(const a of nodes){if(!reduce){a.x+=a.vx*spd;a.y+=a.vy*spd;if(a.x<0||a.x>W)a.vx*=-1;if(a.y<0||a.y>H)a.vy*=-1}cx.fillStyle=`rgba(${col},.8)`;cx.beginPath();cx.arc(a.x,a.y,a.r,0,6.283);cx.fill()}
+  for(let i=0;i<nodes.length;i++){const a=nodes[i];for(let j=i+1;j<nodes.length;j++){const b=nodes[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<(lite?110:130))ln(a.x,a.y,b.x,b.y,d,lite?110:130)}
+   const m=Math.hypot(a.x-mouse.x,a.y-mouse.y);if(m<150)ln(a.x,a.y,mouse.x,mouse.y,m,150)}
+  if(!reduce)requestAnimationFrame(draw)}
+ addEventListener("pointermove",e=>{mouse.x=e.clientX;mouse.y=e.clientY},{passive:true});
+ addEventListener("pointerdown",e=>{if(reduce||e.target.closest("a,button,input,textarea"))return;for(let i=0;i<3;i++)nodes.push({x:e.clientX,y:e.clientY,vx:(Math.random()-.5)*1.6,vy:(Math.random()-.5)*1.6,r:Math.random()+1});if(nodes.length>80)nodes.splice(0,nodes.length-80)});
+ addEventListener("resize",()=>{if(innerWidth!==lw){lw=innerWidth;size();if(reduce)draw()}});lw=innerWidth;size();draw();window.redraw=()=>{if(reduce)draw()}})();
+
+/* toy guide + pinned project belt + scroll effects */
+const toy=$("#toy"),say=$("#say"),tmenu=$("#tmenu"),stage=$(".stage"),form=$("#fcard"),about=$("#about"),hdr=$("header"),bar=$("#progress");
+let cx,cy,cr=0,mode="",first=true,sayT,running=false,lastSy=-1;
+function kick(){if(!running){running=true;requestAnimationFrame(frame)}}
+const lines={rail:"Hi! Click me for the menu",work:"Let me pull up the projects",contact:"Tell me about your project!"};
+function speak(t){say.textContent=t;say.classList.add("on");clearTimeout(sayT);sayT=setTimeout(()=>say.classList.remove("on"),3400)}
+$("#toy-btn").onclick=()=>tmenu.classList.toggle("open");
+tmenu.addEventListener("click",e=>{if(e.target.closest("a"))tmenu.classList.remove("open")});
+function frame(){
+ const vh=innerHeight,vw=innerWidth,sy=scrollY,narrow=vw<820,s=clamp(vw/1100,.62,1.15),docH=document.documentElement.scrollHeight-vh,prog=docH>0?sy/docH:0;
+ bar.style.transform=`scaleX(${prog})`;hdr.classList.toggle("scrolled",sy>8);
+ const yy=sy+vh*.5,si=yy<work.offsetTop?0:yy<about.offsetTop?1:2;
+ if(si!==scene){scene=si;layers.forEach((l,k)=>l.classList.toggle("active",k===si));window.redraw&&window.redraw()}
+ const wr=work.getBoundingClientRect(),fr=form.getBoundingClientRect(),flat=work.classList.contains("flat"),N=cards.length;
+ const inWork=!flat&&wr.top<vh*.5&&wr.bottom>vh*.5,inContact=fr.top<vh*.8&&fr.bottom>vh*.2,m=inWork?"work":inContact?"contact":"rail";
+ let bx,by,rot=0,drag=false,walk=false;
+ if(!flat){
+  const D=wr.height-stage.offsetHeight,u=clamp((64-wr.top)/D,0,1),f=u*(N-1),k=N>1?Math.min(Math.floor(f),N-2):0,frac=N>1?f-k:0,fe=k+clamp((frac-.35)/.65,0,1);
+  const sr=stage.getBoundingClientRect(),mx=sr.left+sr.width/2,my=sr.top+sr.height/2,cw=Math.min(520,vw*.84),STEP=Math.min(vw*.9,cw+120);
+  cards.forEach((c,i)=>{const d=i-fe,a=Math.min(Math.abs(d),1);c.style.transform=`translate(-50%,-50%) translateX(${d*STEP}px) scale(${1-.14*a})`;c.style.opacity=1-.75*a;c.classList.toggle("active",Math.abs(d)<.3)});
+  $("#count").textContent=String(Math.round(fe)+1).padStart(2,"0")+" / "+String(N).padStart(2,"0");
+  const ton=(j,ff)=>mx+(j-ff)*STEP-cw/2-40*s;
+  if(N>1&&f<N-1){if(frac<.35){bx=lerp(ton(k,k),ton(k+1,k),frac/.35);walk=frac>.001}else{bx=ton(k+1,fe);drag=true;walk=frac<.999}}else bx=ton(N-1,N-1);
+  bx=Math.max(bx,28*s);by=my+cards[0].offsetHeight/2-8;
+ }
+ if(m==="contact"){rot=narrow?8:14;bx=narrow?fr.right-50*s:fr.left-26*s;by=narrow?fr.top+8:clamp(fr.top+230,160,vh-10);drag=false;walk=false}
+ else if(m==="rail"){bx=narrow?14:50;by=lerp(190*s,vh-20,prog)}
+ if(m!==mode){mode=m;speak(lines[m])}
+ if(first){cx=bx;cy=by;first=false}
+ const q=reduce?1:.14;cx+=(bx-cx)*q;cy+=(by-cy)*q;cr+=(rot-cr)*q;
+ toy.classList.toggle("run",!reduce&&(Math.abs(bx-cx)+Math.abs(by-cy)>4||(m==="work"&&walk)));
+ toy.classList.toggle("drag",m==="work"&&drag);toy.classList.toggle("lean",m==="contact");
+ toy.style.transform=`translate(${cx-42}px,${cy-140}px) rotate(${cr}deg) scale(${s})`;
+ const settled=Math.abs(bx-cx)+Math.abs(by-cy)<.5&&Math.abs(rot-cr)<.2&&sy===lastSy;lastSy=sy;
+ if(settled){running=false;toy.classList.remove("run")}else requestAnimationFrame(frame)}
+addEventListener("scroll",kick,{passive:true});addEventListener("resize",kick);kick();
+
+/* help bot */
+const WA="https://wa.me/"+WHATSAPP,A=(h,t,x)=>`<a href="${h}"${x?' target="_blank" rel="noopener"':""}>${t}</a>`;
+const LW=A(WA,"WhatsApp",1),LF=A("#contact","contact form"),LM=A("mailto:"+EMAIL,EMAIL),R=a=>a[Math.floor(Math.random()*a.length)];
+const intents=[
+ [["hire","price","pricing","cost","quote","rate","budget","how much","pay"],()=>`Elkanah takes on web and software projects. Tell him what you need through the ${LF} or on ${LW} and he will reply with a plan and a quote.`],
+ [["project","projects","portfolio","demo","examples","built"],()=>`See Elkanah’s work in the ${A("#work","Work")} section. More projects are coming soon.`],
+ [["contact","email","phone","call","whatsapp","reach","number","get in touch"],()=>`Reach Elkanah on ${LW}, by email at ${LM}, by phone on +233 55 198 0683, or through the ${LF}.`],
+ [["skills","stack","technologies","tools","languages","experience"],()=>`Elkanah works with HTML, CSS, JavaScript, React, Node.js and Git, with a focus on clean, readable code.`],
+ [["who is elkanah","about elkanah","about him","about you","who built","who made"],()=>`Elkanah is a web and software developer in Accra, Ghana, and the person behind Elkode. Read more in the ${A("#about","About")} section.`],
+ [["where","location","based","accra","ghana","country"],()=>`Elkanah is based in Accra, Ghana. Message him to talk about working together from anywhere.`],
+ [["available","availability","freelance","remote"],()=>`Elkanah is open to new projects. Message him on ${LW} to talk about timing.`],
+ [["review","reviews","testimonial","feedback","clients"],()=>`Client feedback is in the ${A("#reviews","Reviews")} section.`],
+ [["website","web","site","landing","shop","store","app","apps","software","seo","speed","domain","hosting","deploy"],()=>`Websites, web apps, speed and SEO, and getting a site online are exactly what Elkanah does. Describe your idea through the ${LF}.`],
+ [["code","coding","javascript","react","python","html","css","learn","bug","ai","chatgpt"],()=>`Good topic! Elkanah keeps code clean and learns by building real things. For help with a project, message him through the ${LF}.`],
+ [["joke","funny"],()=>`Why do programmers prefer dark mode? Because light attracts bugs. Elkanah builds sites with fewer of them!`],
+ [["how are you","whats up","what's up"],()=>`Doing great, thanks! Ask me anything about Elkanah or this site.`],
+ [["who are you","your name","what are you","are you a bot","help"],()=>`I’m the Elkode Assistant. I can tell you about Elkanah, his skills, projects, pricing and how to contact him.`],
+ [["thanks","thank","thx","cheers","great","awesome","cool"],()=>`You’re welcome! Anything else about Elkanah or his work?`],
+ [["bye","goodbye","later","cya"],()=>`Goodbye! The ${LF} and ${LW} are always open.`],
+ [["hi","hello","hey","hola","yo","howdy","morning","evening"],()=>R([`Hi there! Ask me about Elkanah’s work, skills or how to hire him.`,`Hello! Welcome to Elkode. What would you like to know?`])]];
+const fallbacks=[()=>`That’s a bit outside what I know, since I’m focused on Elkanah and this site. But I can tell you about his ${A("#work","projects")}, his skills, or how to hire him.`,()=>`Interesting question! I stay close to Elkanah’s work, so ask me about his services or pricing, or message him on ${LW} for a real answer.`,()=>`Not sure about that one, but here’s what I know: Elkanah builds clean, fast websites and software. Want to see his ${A("#work","work")} or contact him?`];
+function localAnswer(raw){const q=raw.toLowerCase().replace(/’/g,"'").trim(),w=q.split(/\W+/).filter(Boolean);
+ const mm=q.replace(/^(what('s| is)|calculate|solve)\s*/,"").replace(/[=?,]/g,"").trim();
+ if(/^[\d\s+\-*/().%x×÷]+$/.test(mm)&&/\d\s*[+\-*/x×÷%]\s*\d/.test(mm)){try{const v=Function('"use strict";return('+mm.replace(/[x×]/g,"*").replace(/÷/g,"/")+")")();if(isFinite(v))return`That’s ${+v.toFixed(6)}. Want to see Elkanah’s ${A("#work","work")}?`}catch(e){}}
+ if(w.length<=3&&w.every(x=>["yes","yeah","yep","sure","ok","okay","please"].includes(x)))return`Great! The quickest ways to reach Elkanah are ${LW} or the ${LF}.`;
+ let best=null,bs=0;for(const it of intents){let s=0;for(const k of it[0]){if(k.includes(" ")){if(q.includes(k))s+=2}else if(w.some(x=>x===k||(k.length>4&&x.startsWith(k))))s++}if(s>bs){bs=s;best=it}}
+ return best?best[1]():R(fallbacks)()}
+const btn=$("#bot-btn"),tip=$("#bot-tip"),panel=$("#bot-panel"),msgs=$("#bot-msgs"),quick=$("#bot-quick"),input=$("#bot-input"),chat=[];let greeted=false;
+function add(t,who,html){const m=document.createElement("div");m.className="msg "+who;html?m.innerHTML=t:m.textContent=t;msgs.appendChild(m);msgs.scrollTop=msgs.scrollHeight}
+async function brain(q){if(AI_ENDPOINT){try{const r=await fetch(AI_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:q,history:chat.slice(-8)})});if(r.ok){const d=await r.json();if(d&&d.reply)return{t:d.reply,html:false}}}catch(e){}}return{t:localAnswer(q),html:true}}
+async function reply(q){chat.push({role:"user",content:q});const t=document.createElement("div");t.className="msg bot typing";t.innerHTML="<span></span><span></span><span></span>";msgs.appendChild(t);msgs.scrollTop=msgs.scrollHeight;
+ const[res]=await Promise.all([brain(q),new Promise(r=>setTimeout(r,700))]);t.remove();add(res.t,"bot",res.html);chat.push({role:"assistant",content:res.html?res.t.replace(/<[^>]+>/g,""):res.t})}
+function openPanel(){panel.classList.add("open");btn.setAttribute("aria-expanded","true");tip.classList.remove("show");
+ if(!greeted){greeted=true;add("Hi! I’m Elkode Assistant. How can I help?","bot");[["See projects","Show me your projects"],["Hire me","How can I hire you?"],["About Elkanah","Who is Elkanah?"],["Contact","How do I contact you?"]].forEach(([l,q])=>{const b=document.createElement("button");b.type="button";b.textContent=l;b.onclick=()=>{add(l,"me");reply(q)};quick.appendChild(b)})}input.focus()}
+function closePanel(){panel.classList.remove("open");btn.setAttribute("aria-expanded","false");btn.focus()}
+btn.onclick=()=>panel.classList.contains("open")?closePanel():openPanel();$("#bot-close").onclick=closePanel;
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){if(panel.classList.contains("open"))closePanel();tmenu.classList.remove("open")}});
+$("#bot-form").onsubmit=e=>{e.preventDefault();const q=input.value.trim();if(!q)return;add(q,"me");input.value="";reply(q)};
+msgs.addEventListener("click",e=>{if(e.target.closest('a[href^="#"]')&&innerWidth<760)closePanel()});
+/* the comment bubble keeps coming back, forever */
+const tips=["Need help? Click here for more info","Questions about Elkanah? Ask me!","Want a quote? Chat with me","Curious about the projects? Ask me"];let ti=0;
+(function loop(d){setTimeout(()=>{if(!panel.classList.contains("open")){tip.textContent=tips[ti++%tips.length];tip.classList.add("show");btn.classList.remove("pulse");void btn.offsetWidth;btn.classList.add("pulse");setTimeout(()=>tip.classList.remove("show"),6000)}loop(11000)},d)})(2500);
+
+/* contact form */
+$("#cform").addEventListener("submit",async e=>{e.preventDefault();const f=e.target,b=f.querySelector("button"),st=$("#fstat");b.disabled=true;b.textContent="Sending…";st.textContent="";
+ if(f.action.includes("YOUR_FORM_ID")){st.textContent="The form isn’t connected yet. Please email "+EMAIL+" for now.";b.disabled=false;b.textContent="Send message";return}
+ try{const r=await fetch(f.action,{method:"POST",body:new FormData(f),headers:{Accept:"application/json"}});if(!r.ok)throw 0;f.reset();st.textContent="Message sent. I’ll reply within a day or two."}
+ catch(err){st.textContent="The message did not send. Please email "+EMAIL+" instead."}
+ b.disabled=false;b.textContent="Send message"});
+</script>
+</body>
+</html>

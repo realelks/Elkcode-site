@@ -8,6 +8,7 @@
 <meta property="og:title" content="Elkode"><meta property="og:description" content="Clean code. Built to last.">
 <meta property="og:image" content="https://elkode.tech/images/og-image.png">
 <link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <script>document.documentElement.classList.add("js")</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -18,7 +19,7 @@ html{scroll-behavior:smooth;scroll-padding-top:70px}
 body{background:var(--bg);color:var(--text);font:400 1.06rem/1.65 var(--body);overflow-x:hidden}
 a{color:inherit}:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
-@media(min-width:900px){.wrap{padding-left:90px}}
+@media(min-width:1024px){.wrap{padding-left:90px}}
 section{padding:96px 0}
 h1,h2,h3{font-family:var(--head);line-height:1.05;letter-spacing:-.02em}
 h2{font-size:clamp(2rem,5vw,3.2rem);margin-bottom:14px}
@@ -27,27 +28,28 @@ h2{font-size:clamp(2rem,5vw,3.2rem);margin-bottom:14px}
 .btn.primary{background:#fff;color:var(--ink);border-color:#fff}
 .btn:hover{transform:translateY(-2px);border-color:var(--accent)}.btn:disabled{opacity:.6;cursor:wait}
 /* header */
-header{position:sticky;top:0;z-index:20;background:rgba(10,14,22,.95);border-bottom:1px solid var(--line);overflow:hidden;transition:box-shadow .3s}
-header.scrolled{box-shadow:0 8px 24px rgba(0,0,0,.4)}
+header{--brand:#0158c2;position:sticky;top:0;z-index:20;background:rgba(255,255,255,.97);border-bottom:1px solid #e1e7f0;overflow:hidden;transition:box-shadow .3s}
+header.scrolled{box-shadow:0 6px 20px rgba(10,14,22,.14)}
 .bar{position:relative;z-index:1;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:64px;max-width:1120px;margin:0 auto;padding:0 24px}
-.logo{font:800 1.4rem var(--head);text-decoration:none}.logo i{font-style:normal;color:var(--accent)}
+.logo{display:flex;align-items:center;text-decoration:none}.logo img{display:block;height:40px;width:auto}
 nav ul{display:flex;gap:26px;list-style:none;padding:0}
-nav a{text-decoration:none;color:var(--muted);font-weight:500;position:relative}
-nav a:hover,nav a.active{color:#fff}
-nav a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--accent);transform:scaleX(0);transition:transform .3s}
+nav a{text-decoration:none;color:#475569;font-weight:500;position:relative}
+nav a:hover,nav a.active{color:var(--brand)}
+nav a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--brand);transform:scaleX(0);transition:transform .3s}
 nav a.active::after{transform:scaleX(1)}
 .hire{justify-self:end;padding:8px 18px;font-size:.95rem}
-header::after{content:"";position:absolute;top:0;bottom:0;left:0;width:60%;background:linear-gradient(100deg,transparent,rgba(var(--sc),.13),transparent);transform:translateX(-120%);opacity:0;animation:sweep 10s ease-in-out infinite;pointer-events:none}
-header::before{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,transparent,rgba(var(--sc),.5),transparent);animation:pulse 5s ease-in-out infinite alternate;pointer-events:none}
+header .btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}header .btn.primary:hover{background:#0a4aa3;border-color:#0a4aa3}
+header::after{content:"";position:absolute;top:0;bottom:0;left:0;width:60%;background:linear-gradient(100deg,transparent,rgba(1,88,194,.07),transparent);transform:translateX(-120%);opacity:0;animation:sweep 10s ease-in-out infinite;pointer-events:none}
+header::before{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,transparent,rgba(1,88,194,.45),transparent);animation:pulse 5s ease-in-out infinite alternate;pointer-events:none}
 @keyframes sweep{0%{transform:translateX(-120%);opacity:0}10%,50%{opacity:1}62%,100%{transform:translateX(260%);opacity:0}}
 @keyframes pulse{from{opacity:.15}to{opacity:.55}}
 /* hero */
-.hero{padding:84px 0 0}
-.hero h1{font-size:clamp(3rem,10.5vw,7.6rem);font-weight:800;line-height:.95}
+.hero{display:flex;flex-direction:column;min-height:calc(100vh - 64px);min-height:calc(100svh - 64px);padding:0}.hero>.wrap{flex:1;display:flex;flex-direction:column;justify-content:center;width:100%;padding-top:40px;padding-bottom:48px}
+.hero h1{font-size:clamp(3rem,8vw,6.4rem);font-weight:800;line-height:.95}
 .hero h1 span{display:block}.hero h1 .b{color:var(--accent);padding-left:clamp(0px,9vw,130px)}
 .hero .row{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-top:36px}
 .hero p{color:var(--muted);max-width:42ch}.cta{display:flex;gap:12px;flex-wrap:wrap}
-.marquee{overflow:hidden;border-block:1px solid var(--line);padding:16px 0;margin-top:64px;background:rgba(255,255,255,.04)}
+.marquee{overflow:hidden;border-block:1px solid var(--line);padding:16px 0;margin-top:0;background:rgba(255,255,255,.04)}
 .marquee div{display:flex;gap:48px;width:max-content;animation:mq 24s linear infinite;font:800 1.6rem var(--head);color:var(--muted)}
 @keyframes mq{to{transform:translateX(-50%)}}
 /* work (pinned, toy drags the cards) */
@@ -83,8 +85,8 @@ header::before{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;b
 /* about bento */
 .bento{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:32px}
 .tile{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px}
-.t-photo{grid-row:1/3;padding:0;border-radius:220px 220px 18px 18px;overflow:hidden;min-height:360px;display:grid;place-items:center;color:var(--muted);text-align:center}
-.t-photo img{width:100%;height:100%;object-fit:cover}.t-bio{grid-column:2/4}
+.t-photo{grid-row:1/3;padding:0;border-radius:220px 220px 18px 18px;overflow:visible;position:relative;min-height:360px;display:grid;place-items:center;color:var(--muted);text-align:center}
+.t-photo img{width:100%;height:100%;object-fit:cover;border-radius:inherit}.t-photo>.badge{position:absolute;right:-12px;bottom:-16px;top:auto;left:auto;width:92px;height:auto;border-radius:14px;border:3px solid var(--bg);box-shadow:0 10px 26px rgba(0,0,0,.5);transform:rotate(6deg);z-index:2}.t-bio{grid-column:2/4}
 .tile h3{font-size:1.25rem;margin-bottom:10px}.tile ul{padding-left:18px;color:var(--muted)}
 pre.code{font:400 .9rem/1.8 ui-monospace,Menlo,Consolas,monospace;color:var(--muted);overflow-x:auto}.k{color:var(--accent)}.s{color:#fff}
 /* reviews */
@@ -123,7 +125,9 @@ footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;m
 @keyframes dA{from{transform:scale(1.02) translate(-2%,-1.5%)}to{transform:scale(1.13) translate(2%,1.5%)}}
 @keyframes dB{from{transform:scale(1.13) translate(2%,-1.5%)}to{transform:scale(1.02) translate(-2%,1.5%)}}
 #cv{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
-#progress{position:fixed;top:0;left:0;right:0;height:3px;background:#fff;transform:scaleX(0);transform-origin:left;z-index:30}
+#glow{position:fixed;left:0;top:0;width:440px;height:440px;margin:0;border-radius:50%;pointer-events:none;z-index:-1;opacity:0;transition:opacity .4s;will-change:transform;background:radial-gradient(circle,rgba(var(--sc),.24),rgba(var(--sc),.09) 42%,transparent 70%)}
+@media(hover:none){#glow{display:none}}
+#progress{position:fixed;top:0;left:0;right:0;height:3px;background:#0158c2;transform:scaleX(0);transform-origin:left;z-index:30}
 /* toy */
 #toy{position:fixed;left:0;top:0;z-index:45;width:84px;height:140px;transform-origin:50% 100%;pointer-events:none}
 #toy-btn{pointer-events:auto;position:absolute;inset:0;background:none;border:0;cursor:pointer;padding:0}
@@ -154,11 +158,56 @@ footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;m
 @keyframes dot{0%,60%,100%{transform:none;opacity:.5}30%{transform:translateY(-4px);opacity:1}}
 .quick{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 10px}.quick button{background:none;border:1px solid var(--line);color:#fff;border-radius:999px;padding:5px 12px;font:inherit;font-size:.88rem;cursor:pointer}.quick button:hover{border-color:var(--accent)}
 #bot-form{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line)}#bot-form input{flex:1;min-width:0;padding:9px 12px}#bot-form .btn{padding:9px 16px}
-@media(max-width:900px){.bento,.cgrid{grid-template-columns:1fr}.t-photo{grid-row:auto;min-height:300px}.t-bio{grid-column:auto}.cgrid{gap:32px}}
-@media(max-width:760px){section{padding:64px 0}.hire{display:none}.bar{grid-template-columns:auto 1fr}nav ul{gap:12px;font-size:.85rem;justify-content:flex-end}#bot-btn{width:52px;height:52px;right:14px;bottom:14px}#bot-tip,#bot-panel{right:14px;bottom:76px}}
+/* ===== responsive: phone <=639 | tablet 640-1023 | laptop >=1024 ===== */
+.menu-btn,.m-hire{display:none}
+.menu-btn{justify-self:end;width:44px;height:44px;border:1px solid #cfd8e6;border-radius:12px;background:#fff;cursor:pointer;place-content:center;gap:5px;padding:0}
+.menu-btn span{display:block;width:20px;height:2px;background:#0a0e16;border-radius:2px;transition:transform .25s,opacity .2s}
+.menu-btn[aria-expanded=true] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.menu-btn[aria-expanded=true] span:nth-child(2){opacity:0}
+.menu-btn[aria-expanded=true] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media(min-width:1024px){html{font-size:14px}section{padding:84px 0}}
+@media(min-width:1500px){html{font-size:15px}}
+@media(min-width:1024px){.flat #belt{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:1023px){
+ #toy{display:none}
+ section{padding:80px 0}.work.flat{padding:80px 0}
+ .hero h1{font-size:clamp(3.2rem,9vw,5.6rem)}
+ .cgrid{grid-template-columns:1fr;gap:36px}
+ .flat #belt{grid-template-columns:1fr 1fr}
+ .flat .card:last-child:nth-child(odd){grid-column:1/-1;justify-self:center;width:calc(50% - 10px)}
+}
+@media(min-width:900px) and (max-width:1023px){.cgrid{grid-template-columns:1fr 1.1fr;gap:40px}}
+@media(min-width:640px) and (max-width:1023px){
+ .bento{grid-template-columns:1fr 1fr}
+ .t-photo{grid-row:auto;grid-column:1;min-height:340px}.t-bio{grid-column:2}
+ nav ul{gap:16px;font-size:.92rem}.hire{padding:7px 14px}
+}
+@media(max-width:639px){
+ section{padding:64px 0}.work.flat{padding:64px 0}
+ .hero h1{font-size:clamp(2.1rem,9.6vw,3.6rem)}.hero h1 .b{padding-left:6vw}
+ .hero .row{margin-top:28px;gap:24px}.cta{width:100%}.cta .btn{flex:1;text-align:center}
+ .bar{grid-template-columns:1fr auto}.hire{display:none}.menu-btn{display:grid}
+ nav{position:fixed;top:64px;left:0;right:0;bottom:0;overflow-y:auto;background:#fff;padding:20px 24px 32px;transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility 0s .25s}
+ nav.open{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+ nav ul{flex-direction:column;gap:0}
+ nav li a{display:block;padding:16px 0;font:700 1.7rem var(--head);color:#0a0e16;border-bottom:1px solid #e1e7f0}
+ nav a::after{display:none}
+ .m-hire{display:block;margin-top:24px}.m-hire .btn{display:block;text-align:center;border-bottom:0;color:#fff;font:500 1rem var(--body);padding:14px 24px}
+ .flat #belt{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:24px;margin:24px -24px 0;padding:0 24px 10px;scrollbar-width:none}
+ .flat #belt::-webkit-scrollbar{display:none}
+ .flat .card,.flat .card:last-child:nth-child(odd){flex:0 0 82%;width:auto;scroll-snap-align:start}
+ .t-photo{min-height:0;aspect-ratio:4/5;width:min(100%,260px);margin-inline:auto;position:relative}.t-photo img{position:absolute;inset:0}.t-photo>.badge{width:72px;right:-8px;bottom:-12px}
+ .tile,.fcard{padding:22px}
+ .js [data-a=left]{transform:translateX(-28px) rotate(-2deg)}.js [data-a=right]{transform:translateX(28px) rotate(2deg)}
+ footer .row{flex-direction:column}footer a{margin:0 16px 0 0;display:inline-block;padding:6px 0}
+ #bot-btn{width:52px;height:52px;right:14px}#bot-tip{right:14px;bottom:78px;max-width:calc(100vw - 100px)}
+ #bot-panel{left:0;right:0;bottom:0;width:100%;max-width:none;height:min(80vh,560px);height:min(80dvh,560px);max-height:none;border-radius:18px 18px 0 0;border-bottom:0}
+ #bot-form{padding-bottom:calc(10px + env(safe-area-inset-bottom,0px))}
+ body.menu-open #bot-btn,body.menu-open #bot-tip{display:none}
+}
 html{-webkit-text-size-adjust:100%}
-@media(min-width:1500px){.wrap,.bar{max-width:1280px}html{font-size:17px}}
-@media(max-width:380px){.wrap,.bar{padding:0 16px}nav ul{gap:9px;font-size:.8rem}.btn{padding:11px 18px}}
+@media(min-width:1500px){.wrap,.bar{max-width:1280px}}
+@media(max-width:380px){.wrap,.bar{padding:0 16px}.btn{padding:11px 18px}}
 @media(hover:none){nav a{padding:8px 0}}
 #bot-btn{bottom:calc(14px + env(safe-area-inset-bottom,0px))}
 @media(prefers-reduced-motion:reduce){.js [data-a]{opacity:1!important;transform:none!important;clip-path:none!important}header::before,header::after{animation:none!important}header::after{display:none}*{animation:none!important;transition:none!important;scroll-behavior:auto!important}#progress{display:none}}
@@ -166,13 +215,14 @@ html{-webkit-text-size-adjust:100%}
 </head>
 <body>
 <div id="bg" aria-hidden="true"><div class="bg-layer l1 active"></div><div class="bg-layer l2"></div><div class="bg-layer l3"></div></div>
-<canvas id="cv" aria-hidden="true"></canvas><div id="progress"></div>
+<canvas id="cv" aria-hidden="true"></canvas><div id="glow" aria-hidden="true"></div><div id="progress"></div>
 <header><div class="bar">
-  <a class="logo" href="#home">El<i>code</i></a>
+  <a class="logo" href="#home" aria-label="Elkode home"><img src="images/logo.png" alt="Elkode" width="1896" height="531"></a>
   <nav aria-label="Main"><ul>
     <li><a href="#home">Home</a></li><li><a href="#work">Work</a></li><li><a href="#about">About</a></li><li><a href="#reviews">Reviews</a></li><li><a href="#contact">Contact</a></li>
-  </ul></nav>
+  <li class="m-hire"><a class="btn primary" href="#contact">Hire me</a></li></ul></nav>
   <a class="btn primary hire" href="#contact">Hire me</a>
+  <button class="menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </div></header>
 
 <main>
@@ -193,7 +243,7 @@ html{-webkit-text-size-adjust:100%}
 <section id="about"><div class="wrap">
   <h2 data-a="wipe">About Elkanah</h2>
   <div class="bento">
-    <div class="tile t-photo" data-a="zoom"><img src="images/elkanah 2.jpg" alt="Portrait of Elkanah" onerror="this.replaceWith('Add your photo as images/elkanah.jpg')"></div>
+    <div class="tile t-photo" data-a="zoom"><img src="images/elkanah 2.jpg" alt="Portrait of Elkanah" onerror="this.replaceWith('Add your photo as images/elkanah.jpg')"><img class="badge" src="images/badge.png" alt="Elkode badge" width="92" height="89" onerror="this.remove()"></div>
     <div class="tile t-bio" data-a="left"><h3>Hello, I’m Elkanah</h3><p class="lead">I’m a web and software developer based in Accra. I care about code that is readable, fast and easy to change later. Replace this text with your own story: what you build, what you enjoy and what you want to work on next.</p></div>
     <div class="tile" data-a="flip"><h3>What I build</h3><ul><li>Websites and landing pages</li><li>Web apps and tools</li><li>Speed and SEO</li><li>Hosting and launch</li></ul></div>
     <div class="tile" data-a="right"><pre class="code"><span class="k">const</span> elkode = {
@@ -222,8 +272,7 @@ html{-webkit-text-size-adjust:100%}
     </ul>
   </div>
   <div class="fcard" id="fcard" data-a="right">
-    <!-- Replace YOUR_FORM_ID with your Formspree form ID (formspree.io) -->
-    <form id="cform" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <form id="cform" action="https://formspree.io/f/mgakrjgg" method="POST">
       <input type="hidden" name="_subject" value="New message from elkode.tech"><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none">
       <label>Name <input name="name" required autocomplete="name"></label>
       <label>Email <input type="email" name="email" required autocomplete="email"></label>
@@ -259,7 +308,7 @@ html{-webkit-text-size-adjust:100%}
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches,clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),lerp=(a,b,t)=>a+(b-a)*t;
-const lite=reduce||matchMedia("(max-width:760px)").matches||(navigator.deviceMemory&&navigator.deviceMemory<=4)||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=4);
+const lite=reduce||matchMedia("(max-width:639px)").matches||(navigator.deviceMemory&&navigator.deviceMemory<=4)||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=4);
 if(lite)document.documentElement.classList.add("lite");
 /* ---------- EDIT THESE ---------- */
 const EMAIL="elkanahaidoo2009@gmail.com",WHATSAPP="233551980683",AI_ENDPOINT="";
@@ -269,9 +318,10 @@ const projects=[
  {title:"Project Two",description:"Yet to be uploaded. Description: faster, simpler, or something people now use.",stack:["React","Node.js"],liveUrl:"#",repoUrl:"#",image:"images/project-2.jpg",color:"#ffffff"},
  {title:"Project Three",description:"Add the problem, your solution, and the outcome here.",stack:["JavaScript","API"],liveUrl:"#",repoUrl:"#",image:"images/project-3.jpg",color:"#ffe9a8"}];
 const reviews=[
- {q:"Elkanah delivered a clean, fast site and kept me updated at every step.",n:"Client name",r:"Business owner"},
- {q:"Great communication and the code was easy for my team to pick up.",n:"Client name",r:"Startup founder"},
- {q:"Exactly what I asked for, finished ahead of time.",n:"Client name",r:"Freelance designer"}];
+ {q:"Elkanah delivered a clean, fast site and kept me updated at every step.",n:"David Washington",r:"Business owner"},
+ {q:"Great communication and the code was easy for my team to pick up.",n:"Samuel Ceaser",r:"Startup founder"},
+ {q:"Exactly what I asked for, finished ahead of time.",n:"Bryan Smith",r:"Freelance designer"},
+ {q:"Didn't expect my site to be much better, He is actually good.",n:"Cloe Adele",r:"Fashion designer"}];
 /* -------------------------------- */
 $("#phone").addEventListener("input",e=>{const raw=e.target.value,plus=raw.trim().startsWith("+"),d=raw.replace(/\D/g,"").slice(0,15),o=(d.match(/.{1,3}/g)||[]).join(" "),f=plus?"+"+o:o;if(raw!==f)e.target.value=f});
 $("#yr").textContent=new Date().getFullYear();
@@ -281,14 +331,14 @@ $("#mq").innerHTML=Array(2).fill(["HTML","CSS","JavaScript","React","Node.js","G
 const belt=$("#belt");
 projects.forEach(p=>{const c=document.createElement("article");c.className="card";
  c.innerHTML=`<div class="thumb" style="background:${p.color}">${p.title[0]}<img src="${p.image}" alt="${p.title} screenshot" loading="lazy" onerror="this.remove()"></div><div class="cbody"><h3>${p.title}</h3><p>${p.description}</p><div class="tags">${p.stack.map(s=>`<span>${s}</span>`).join("")}</div><div class="links"><a href="${p.liveUrl}">Live demo</a><a href="${p.repoUrl}">GitHub</a></div></div>`;belt.appendChild(c)});
-const cards=$$(".card"),work=$("#work");work.style.setProperty("--n",cards.length);function setFlat(){work.classList.toggle("flat",reduce||innerHeight<560)}setFlat();addEventListener("resize",setFlat);
+const cards=$$(".card"),work=$("#work");work.style.setProperty("--n",cards.length);function setFlat(){work.classList.toggle("flat",reduce||innerHeight<560||innerWidth<1024)}setFlat();addEventListener("resize",setFlat);
 
 /* reviews carousel */
 const track=$("#track"),dots=$("#dots");let ri=0,rt;
 reviews.forEach((r,i)=>{track.insertAdjacentHTML("beforeend",`<div class="slide"><div class="stars" aria-label="5 stars">★★★★★</div><blockquote>“${r.q}”</blockquote><cite>${r.n}, ${r.r}</cite></div>`);const d=document.createElement("i");d.onclick=()=>show(i);dots.appendChild(d)});
 function show(i){ri=(i+reviews.length)%reviews.length;track.style.transform=`translateX(-${ri*100}%)`;[...dots.children].forEach((d,k)=>d.classList.toggle("on",k===ri));clearInterval(rt);if(!reduce)rt=setInterval(()=>show(ri+1),5500)}
 $("#rp").onclick=()=>show(ri-1);$("#rn").onclick=()=>show(ri+1);show(0);
-if(SAMPLE_REVIEWS)$("#sample").textContent="Sample reviews. Replace them with real client feedback.";
+if(SAMPLE_REVIEWS)$("#sample").textContent="Reviews from my Fclients...";
 
 /* reveal animations (play in on the way down, out on the way up) */
 $$("[data-a]").forEach(el=>el.style.setProperty("--i",Math.min([...el.parentNode.children].indexOf(el),5)));
@@ -303,15 +353,19 @@ const layers=$$(".bg-layer");
 (function(){const cv=$("#cv"),cx=cv.getContext("2d"),root=document.documentElement;let W,H,lw=0,nodes=[],mouse={x:-999,y:-999},cur=SC[0].slice(),spd=1,col=cur.join(","),last="";
  function size(){const d=lite?1:Math.min(devicePixelRatio||1,1.5);W=innerWidth;H=innerHeight;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0);
   nodes=Array.from({length:lite?Math.min(28,Math.floor(W*H/30000)):Math.min(60,Math.floor(W*H/24000))},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.5+.8}))}
- function ln(a,b,c,d,m,x){cx.strokeStyle=`rgba(${col},${.25*(1-m/x)})`;cx.beginPath();cx.moveTo(a,b);cx.lineTo(c,d);cx.stroke()}
+ function ln(a,b,c,d,m,x,k=.25){cx.strokeStyle=`rgba(${col},${k*(1-m/x)})`;cx.beginPath();cx.moveTo(a,b);cx.lineTo(c,d);cx.stroke()}
  let lt=0;function draw(t){if(!reduce&&t&&t-lt<(lite?50:33)){requestAnimationFrame(draw);return}lt=t;const T=SC[scene];for(let k=0;k<3;k++)cur[k]=reduce?T[k]:cur[k]+(T[k]-cur[k])*.04;spd=reduce?1:spd+(SP[scene]-spd)*.04;col=cur.map(Math.round).join(",");
   if(col!==last){last=col;root.style.setProperty("--sc",col)}
   cx.clearRect(0,0,W,H);
   for(const a of nodes){if(!reduce){a.x+=a.vx*spd;a.y+=a.vy*spd;if(a.x<0||a.x>W)a.vx*=-1;if(a.y<0||a.y>H)a.vy*=-1}cx.fillStyle=`rgba(${col},.8)`;cx.beginPath();cx.arc(a.x,a.y,a.r,0,6.283);cx.fill()}
   for(let i=0;i<nodes.length;i++){const a=nodes[i];for(let j=i+1;j<nodes.length;j++){const b=nodes[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<(lite?110:130))ln(a.x,a.y,b.x,b.y,d,lite?110:130)}
-   const m=Math.hypot(a.x-mouse.x,a.y-mouse.y);if(m<150)ln(a.x,a.y,mouse.x,mouse.y,m,150)}
+   const m=Math.hypot(a.x-mouse.x,a.y-mouse.y);if(m<220)ln(a.x,a.y,mouse.x,mouse.y,m,220,.6)}
   if(!reduce)requestAnimationFrame(draw)}
- addEventListener("pointermove",e=>{mouse.x=e.clientX;mouse.y=e.clientY},{passive:true});
+ let pr=0;addEventListener("pointermove",e=>{mouse.x=e.clientX;mouse.y=e.clientY;if(reduce&&!pr){pr=1;requestAnimationFrame(()=>{pr=0;draw()})}},{passive:true});
+ const gl=$("#glow");let gx=null,gy=0,tx=0,ty=0,gr=0;
+ function gtick(){gx+=(tx-gx)*.18;gy+=(ty-gy)*.18;gl.style.transform=`translate3d(${gx-220}px,${gy-220}px,0)`;if(Math.abs(tx-gx)+Math.abs(ty-gy)>.5)requestAnimationFrame(gtick);else gr=0}
+ addEventListener("pointermove",e=>{if(e.pointerType==="touch")return;tx=e.clientX;ty=e.clientY;if(gx===null){gx=tx;gy=ty}gl.style.opacity=1;if(!gr){gr=1;requestAnimationFrame(gtick)}},{passive:true});
+ document.documentElement.addEventListener("mouseleave",()=>{gl.style.opacity=0});
  addEventListener("pointerdown",e=>{if(reduce||e.target.closest("a,button,input,textarea"))return;for(let i=0;i<3;i++)nodes.push({x:e.clientX,y:e.clientY,vx:(Math.random()-.5)*1.6,vy:(Math.random()-.5)*1.6,r:Math.random()+1});if(nodes.length>80)nodes.splice(0,nodes.length-80)});
  addEventListener("resize",()=>{if(innerWidth!==lw){lw=innerWidth;size();if(reduce)draw()}});lw=innerWidth;size();draw();window.redraw=()=>{if(reduce)draw()}})();
 
@@ -390,7 +444,14 @@ function closePanel(){panel.classList.remove("open");btn.setAttribute("aria-expa
 btn.onclick=()=>panel.classList.contains("open")?closePanel():openPanel();$("#bot-close").onclick=closePanel;
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){if(panel.classList.contains("open"))closePanel();tmenu.classList.remove("open")}});
 $("#bot-form").onsubmit=e=>{e.preventDefault();const q=input.value.trim();if(!q)return;add(q,"me");input.value="";reply(q)};
-msgs.addEventListener("click",e=>{if(e.target.closest('a[href^="#"]')&&innerWidth<760)closePanel()});
+msgs.addEventListener("click",e=>{if(e.target.closest('a[href^="#"]')&&innerWidth<640)closePanel()});
+/* phone menu */
+const mbtn=$("#menu-btn"),mnav=$("nav");
+function setMenu(o){mnav.classList.toggle("open",o);mbtn.setAttribute("aria-expanded",o);mbtn.setAttribute("aria-label",o?"Close menu":"Open menu");document.body.classList.toggle("menu-open",o);document.body.style.overflow=o?"hidden":""}
+mbtn.onclick=()=>setMenu(!mnav.classList.contains("open"));
+mnav.addEventListener("click",e=>{if(e.target.closest("a"))setMenu(false)});
+addEventListener("resize",()=>{if(innerWidth>=640)setMenu(false)});
+addEventListener("keydown",e=>{if(e.key==="Escape")setMenu(false)});
 /* the comment bubble keeps coming back, forever */
 const tips=["Need help? Click here for more info","Questions about Elkanah? Ask me!","Want a quote? Chat with me","Curious about the projects? Ask me"];let ti=0;
 (function loop(d){setTimeout(()=>{if(!panel.classList.contains("open")){tip.textContent=tips[ti++%tips.length];tip.classList.add("show");btn.classList.remove("pulse");void btn.offsetWidth;btn.classList.add("pulse");setTimeout(()=>tip.classList.remove("show"),6000)}loop(11000)},d)})(2500);
